@@ -1,0 +1,67 @@
+class Solution {
+    public String[] uncommonFromSentences(String s1, String s2) {
+        HashMap<String,Integer> map1 = new HashMap<>();
+        HashMap<String,Integer> map2 = new HashMap<>();
+        StringBuilder sb = new StringBuilder();
+        StringBuilder sb1 = new StringBuilder();
+        for(int i=0;i<s1.length();i++){
+            if(s1.charAt(i)==' '){
+                if(map1.containsKey(String.valueOf(sb))) {
+                    map1.put(String.valueOf(sb), map1.get(String.valueOf(sb)) + 1);
+                }else{
+                    map1.put(String.valueOf(sb),1);
+                }
+                sb = new StringBuilder();
+            }else{
+                sb.append(s1.charAt(i));
+                if(i+1==s1.length()){
+                    if(map1.containsKey(String.valueOf(sb))){
+                        map1.put(String.valueOf(sb), map1.get(String.valueOf(sb)) + 1);
+                    }else {
+                        map1.put(String.valueOf(sb), 1);
+                    }
+                }
+            }
+        }
+        for(int i=0;i<s2.length();i++){
+            if(s2.charAt(i)==' '){
+                if(map2.containsKey(String.valueOf(sb1))) {
+                    map2.put(String.valueOf(sb1), map2.get(String.valueOf(sb1)) + 1);
+                }else {
+                    map2.put(String.valueOf(sb1),1);
+                }
+                sb1 = new StringBuilder();
+            }else{
+                sb1.append(s2.charAt(i));
+                if(i+1==s2.length()){
+                    if(map2.containsKey(String.valueOf(sb1))){
+                        map2.put(String.valueOf(sb1), map2.get(String.valueOf(sb1)) + 1);
+                    }else {
+                        map2.put(String.valueOf(sb1), 1);
+                    }
+                }
+            }
+        }
+        ArrayList<String> r = new ArrayList<>();
+        for(String s : map1.keySet()){
+            if(!map2.containsKey(s)){
+                if(map1.get(s)<=1){
+                    r.add(s);
+                }
+            }
+        }
+        for(String s : map2.keySet()){
+            if(!map1.containsKey(s)){
+                if(map2.get(s)<=1){
+                    r.add(s);
+                }
+            }
+        }
+      String[] ss = new String[r.size()];
+      int in = 0;
+      for(int i=0;i<r.size();i++){
+        ss[in++] = r.get(i);
+      }
+      return ss;
+    }
+}
