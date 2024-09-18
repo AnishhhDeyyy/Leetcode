@@ -1,0 +1,27 @@
+class Solution {
+    public int findMinDifference(List<String> timePoints) {
+         ArrayList<Integer> k  = new ArrayList<>();
+         for(int i=0;i<timePoints.size();i++){
+            String s = timePoints.get(i);
+            StringBuilder hr = new StringBuilder();
+            hr.append(s.charAt(0));
+            hr.append(s.charAt(1));
+            int hrr = Integer.parseInt(String.valueOf(hr));
+            hrr = hrr * 60;
+            StringBuilder min = new StringBuilder();
+            min.append(s.charAt(3));
+            min.append(s.charAt(4));
+            int minn = Integer.parseInt(String.valueOf(min));
+            int t = hrr + minn;
+            k.add(t);
+        }
+        Collections.sort(k);
+        int min = Integer.MAX_VALUE;
+        for(int i=1;i<k.size();i++){
+            int t = k.get(i) - k.get(i-1);
+            min = Math.min(t,min);
+        }
+         min = Math.min(min,(24*60 - k.get(k.size()-1))+k.get(0));
+        return min;
+    }
+}
