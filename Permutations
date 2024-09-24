@@ -1,0 +1,24 @@
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+         int start = 0;
+       List<List<Integer>> l = new ArrayList<>();
+        boolean[] b = new boolean[nums.length];
+        permutation(nums,start,new ArrayList<Integer>(),l,b);
+        return l;
+    }
+     public static void permutation(int[] nums,int start,ArrayList<Integer> list,List<List<Integer>> l,boolean[] b){
+        if(list.size() == nums.length){
+            l.add(new ArrayList<>(list));
+            return;
+        }
+        for(int i=0;i<nums.length;i++){
+            if(!b[i]){
+                b[i] = true;
+                list.add(nums[i]);
+                permutation(nums,start+1,list,l,b);
+                b[i] = false;
+                list.remove(list.size()-1);
+            }
+        }
+    }
+}
