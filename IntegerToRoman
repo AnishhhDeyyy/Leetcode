@@ -1,0 +1,49 @@
+class Solution {
+    public String intToRoman(int num) {
+        LinkedHashMap<Integer,String> map = new LinkedHashMap<>();
+        map.put(1000,"M");
+        map.put(900,"CM");
+        map.put(500,"D");
+        map.put(400,"CD");
+        map.put(100,"C");
+        map.put(90,"XC");
+        map.put(50,"L");
+        map.put(40,"XL");
+        map.put(10,"X");
+        map.put(9,"IX");
+        map.put(5,"V");
+        map.put(4,"IV");
+        map.put(1,"I");
+
+        StringBuilder sb = new StringBuilder();
+        call(map,sb,num);
+        return String.valueOf(sb);
+    }
+      public static void call(HashMap<Integer,String> map,StringBuilder sb,int num){
+        while (num>0){
+            int t = find(map,num);
+            int p = num / t;
+            fill(map,sb,p,t);
+            num = num % t;
+        }
+    }
+    public static void fill(HashMap<Integer,String> map,StringBuilder sb,int div,int t){
+        while (div!=0){
+            sb.append(map.get(t));
+            div--;
+        }
+    }
+    public static int find(HashMap<Integer,String> map,int num){
+        if(map.containsKey(num)){
+            return num;
+        }
+        int t = -1;
+        for(Integer i : map.keySet()){
+            if(i<num){
+                t = i;
+                break;
+            }
+        }
+      return t;
+    }
+}
