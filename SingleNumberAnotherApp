@@ -1,0 +1,22 @@
+public class SinggleNumber {
+    public static void main(String[] args) {
+        int[] nums = new int[]{2,2,1};
+        int ans = 0;
+        for(int i=0;i<32;i++){
+            int cz = 0;
+            int co = 0;
+            int temp = 1<<i;
+            for(int j=0;j<nums.length;j++){
+                if((nums[j] & temp) == 0){
+                    cz++;
+                }else{
+                    co++;
+                }
+            }
+            if(co%2==1){
+                ans = ans | temp;
+            }
+        }
+        System.out.println(ans);
+    }
+}
