@@ -1,0 +1,21 @@
+class Solution {
+    public int singleNumber(int[] nums) {
+        int res = 0;
+        for(int i=0;i<32;i++){
+            int temp = (1 << i);
+            int cz = 0;
+            int co = 0;
+            for(int j=0;j<nums.length;j++){
+                if((nums[j]&temp) == 0){
+                    cz++;
+                }else {
+                    co++;
+                }
+            }
+            if(co%3 == 1){
+                res = (res | temp);
+            }
+        }
+        return res;
+    }
+}
