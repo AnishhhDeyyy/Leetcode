@@ -1,0 +1,59 @@
+class Solution {
+    public int[][] imageSmoother(int[][] img) {
+          int[][] numms = new int[img.length][img[0].length];
+
+        for(int i=0;i< img.length;i++){
+            for(int j=0;j<img[i].length;j++){
+                int sum = call(img,i,j);
+               numms[i][j] = sum;
+            }
+        }
+        return numms;
+    }
+
+      public static int call(int[][] img, int i, int j){
+        int left = 0;
+        int right = 0;
+        int top = 0;
+        int bottom = 0;
+        int leftyt = 0;
+        int rightyt = 0;
+        int leftyb = 0;
+        int rightyb = 0;
+        int count = 1;
+        if(j>0) {
+            left = img[i][j - 1];
+            count++;
+        }
+        if(j<img[0].length-1){
+            right = img[i][j+1];
+            count++;
+        }
+        if(i>0) {
+            top = img[i-1][j];
+            count++;
+        }
+        if( i<img.length-1){
+            bottom = img[i+1][j];
+            count++;
+        }
+        if(i>0 && j>0){
+            leftyt = img[i-1][j-1];
+            count++;
+        }
+        if(i>0 && j<img[0].length-1){
+            rightyt = img[i-1][j+1];
+            count++;
+        }
+        if(i<img.length-1 && j>0){
+            leftyb = img[i+1][j-1];
+            count++;
+        }
+        if(i<img.length-1 && j<img[0].length-1){
+            rightyb = img[i+1][j+1];
+            count++;
+        }
+        int sum = left + top + right + bottom + leftyt + rightyt + leftyb + rightyb+img[i][j];
+        int avg = sum / count;        return avg;
+    }
+}
