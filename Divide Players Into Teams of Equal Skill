@@ -1,0 +1,32 @@
+class Solution {
+    public long dividePlayers(int[] skill) {
+         Arrays.sort(skill);
+        ArrayList<Integer> key = new ArrayList<>();
+        ArrayList<Integer> value = new ArrayList<>();
+        int i = 0;
+        int j = skill.length - 1;
+        int sum = skill[i] + skill[j];
+        boolean b = false;
+        while (i<j){
+            if(skill[i] + skill[j] == sum){
+                key.add(skill[i]);
+                value.add(skill[j]);
+            }else {
+                 b = true;
+                break;
+            }
+            i++;
+            j--;
+        }
+        
+        if(!b){
+            long mul = 0;
+            for(int k=0;k<key.size();k++){
+                mul = mul + key.get(k) * value.get(k);
+            }
+            return mul;
+        }else{
+            return -1;
+        }
+    }
+}
