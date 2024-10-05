@@ -1,0 +1,31 @@
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+      StringBuilder sb = new StringBuilder();
+      ArrayList<String> li = new ArrayList<>();
+        boolean[] b = new boolean[s1.length()];
+        calll(s1,li,b,sb,s2);
+        if(li.size()!=0){
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
+     public static void calll(String s1,ArrayList<String> li,boolean[] b,StringBuilder sb,String s2){
+        if(s1.length() == sb.length()){
+            if(s2.contains(String.valueOf(sb))){
+                li.add(String.valueOf(sb));
+            }
+            return;
+        }
+        for(int i=0;i<s1.length();i++){
+            if(!b[i]){
+                b[i] = true;
+                sb.append(s1.charAt(i));
+                calll(s1,li,b,sb,s2);
+                sb.deleteCharAt(sb.length() - 1);
+                b[i] = false;
+            }
+        }
+    }
+}
