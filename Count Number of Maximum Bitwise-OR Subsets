@@ -1,0 +1,32 @@
+class Solution {
+    public int countMaxOrSubsets(int[] nums) {
+          int start = 0;
+        int max = Integer.MIN_VALUE;
+        int sum = 0;
+        for(int i=0;i<nums.length;i++){
+            sum = sum|nums[i];
+        }
+        max = sum;
+        int count = 0;
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        subset(start,nums,max,new ArrayList<>(),res);
+        return res.size();
+    }
+     public static void subset(int start,int[] nums,int max,ArrayList<Integer> li,   ArrayList<ArrayList<Integer>>  res){
+        if(start == nums.length){
+            int t  = 0;
+            for(int h=0;h<li.size();h++){
+                t = t | li.get(h);
+            }
+            if(max == t){
+                res.add(new ArrayList<>(li));
+            }
+
+            return;
+        }
+            li.add(nums[start]);
+            subset(start+1,nums,max,li,res);
+            li.remove(li.size()-1);
+            subset(start+1,nums,max,li,res);
+    }
+}
