@@ -1,0 +1,51 @@
+class Solution {
+    public List<String> summaryRanges(int[] nums) {
+        ArrayList<String> slist = new ArrayList<>();
+        if(nums.length==0){
+            return slist; 
+        }
+        int in = 0;
+        ArrayList<Integer> li = new ArrayList<>();
+        ArrayList<Integer> se = new ArrayList<>();
+    
+        while (in!=nums.length-1){
+            if(in!=nums.length && nums[in]+1 == nums[in+1]){
+                li.add(nums[in]);
+                se.add(nums[in]);
+                if(in+1 == nums.length-1){
+                    li.add(nums[in+1]);
+                    se.add(nums[in+1]);
+                    call(li,slist,nums);
+                    break;
+                }
+            }else{
+                li.add(nums[in]);
+                int t = call(li,slist,nums);
+                in = t;
+                li.clear();
+            }
+            in++;
+
+        }
+        if(!se.contains(nums[nums.length-1])){
+            slist.add(String.valueOf(nums[nums.length-1]));
+        }
+        return slist;
+    }
+    public static int call(ArrayList<Integer> li,ArrayList<String> slist,int[] nums){
+        if(li.size() == 1){
+            slist.add(String.valueOf(li.get(0)));
+        }else {
+            slist.add(String.valueOf(li.get(0))+"->"+String.valueOf(li.get(li.size()-1)));
+
+        }
+        int index = -1;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i] == li.get(li.size()-1)){
+               index = i;
+               break;
+            }
+        }
+        return index;
+    }
+}
