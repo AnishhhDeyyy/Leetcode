@@ -1,0 +1,42 @@
+class Solution {
+    public boolean hasGroupsSizeX(int[] deck) {
+        if(deck.length==1){
+            return false;
+        }
+        HashMap<Integer,Integer> map = new HashMap<>();
+        for(int i=0;i<deck.length;i++){
+            if(map.containsKey(deck[i])){
+                map.put(deck[i],map.get(deck[i])+1);
+            }else{
+                map.put(deck[i],1);
+            }
+        }
+        int min = Integer.MAX_VALUE;
+        ArrayList<Integer> li = new ArrayList<>();
+        for(Integer i : map.keySet()){
+            li.add(map.get(i));
+        }
+        if(map.size()==1){
+            return true;
+        }
+        int res = gcd(li.get(0),li.get(1));
+        for(int i=2;i<li.size();i++){
+            res = gcd(res, li.get(i));
+        }
+        if(res<=1){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    public static int gcd(int a,int b){
+        int res = 0;
+        while (b > 0){
+            int temp = b;
+            b = a % b;
+            a = temp;
+            res = a;
+        }
+        return res;
+    }
+}
