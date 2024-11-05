@@ -1,0 +1,37 @@
+class Solution {
+    public boolean isCircularSentence(String sentence) {
+        ArrayList<String> li = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<sentence.length();i++){
+            if(sentence.charAt(i)==' '){
+                li.add(String.valueOf(sb));
+                sb = new StringBuilder();
+            }else{
+                sb.append(sentence.charAt(i));
+            }
+        }
+        li.add(String.valueOf(sb));
+        ArrayList<Character> lii = new ArrayList<>();
+        for(int i=0;i<li.size();i++){
+            char ch1 = li.get(i).charAt(0);
+            char ch2 = li.get(i).charAt(li.get(i).length()-1);
+            lii.add(ch1);
+            lii.add(ch2);
+        }
+        int i = 1;
+        while (i<lii.size()){
+            if(i == lii.size()-1){
+                if(!Objects.equals(lii.get(i), lii.get(0))){
+                    return false;
+                }
+                i=i+2;
+            }else {
+                if (lii.get(i) != lii.get(i + 1)) {
+                    return false;
+                }
+                i=i+2;
+            }
+        }
+        return true;
+    }
+}
