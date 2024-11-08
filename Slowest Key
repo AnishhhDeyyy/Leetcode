@@ -1,0 +1,40 @@
+class Solution {
+    public char slowestKey(int[] releaseTimes, String keysPressed) {
+          ArrayList<Integer> li = new ArrayList<>();
+        li.add(releaseTimes[0]);
+        for(int i=1;i<releaseTimes.length;i++){
+            li.add(releaseTimes[i]-releaseTimes[i-1]);
+        }
+        System.out.println(li);
+        ArrayList<Character> list = new ArrayList<>();
+        ArrayList<Integer> indexs = new ArrayList<>();
+        int max = Integer.MIN_VALUE;
+        int pos = -1;
+        for(int i=0;i<li.size();i++){
+            if(max<li.get(i)){
+                max = li.get(i);
+                pos=i;
+            }
+        }
+        indexs.add(pos);
+        for(int i=0;i<li.size();i++){
+            if(max == li.get(i) && pos!=i){
+                indexs.add(i);
+            }
+        }
+        for(int i=0;i<indexs.size();i++){
+            int t = indexs.get(i);
+            list.add(keysPressed.charAt(t));
+        }
+        if(list.size()!=1){
+            char maxx = ' ';
+            for(int i=0;i<list.size();i++){
+                if(maxx<list.get(i)){
+                    maxx = list.get(i);
+                }
+            }
+           return maxx;
+        }
+      return list.get(0);
+    }
+}
