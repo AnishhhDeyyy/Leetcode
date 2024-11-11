@@ -1,0 +1,17 @@
+class Solution {
+    public boolean rotateString(String s, String goal) {
+         StringBuilder sb = new StringBuilder(s);
+        int i = 0;
+        boolean b = false;
+        while(i<s.length()){
+            sb.append(s.charAt(i));
+            sb.deleteCharAt(0);
+            if(String.valueOf(sb).equals(goal)){
+                b = true;
+                break;
+            }
+            i++;
+        }
+        return b;
+    }
+}
