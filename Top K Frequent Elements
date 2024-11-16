@@ -1,0 +1,39 @@
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+         int t = 0;
+        int[] res = new int[k];
+        LinkedHashMap<Integer,Integer> map = new LinkedHashMap<>();
+        for(int i=0;i<nums.length;i++){
+            if(map.containsKey(nums[i])){
+                map.put(nums[i],map.get(nums[i])+1);
+                t++;
+            }else{
+                map.put(nums[i],1);
+            }
+        }
+        if(t == 0){
+            return nums;
+        }
+        ArrayList<Integer> li = new ArrayList<>();
+        for(Integer i : map.keySet()){
+            li.add(map.get(i));
+        }
+        Collections.sort(li,Collections.reverseOrder());
+        int[] r = new int[k];
+        int in = 0;
+        for(int i=0;i<k;i++){
+            r[in++] = li.get(i);
+        }
+        int[] re = new int[k];
+        int inn = 0;
+        for(int i=0;i<r.length;i++){
+            for(Integer j : map.keySet()){
+                if(map.get(j) == r[i]){
+                    re[inn++] = j;
+                     map.put(j,-1);
+                }
+            }
+        }
+        return re;
+    }
+}
