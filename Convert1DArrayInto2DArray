@@ -1,0 +1,28 @@
+class Solution {
+    public int[][] construct2DArray(int[] original, int m, int n) {
+        int in = 0;
+        int[][] res = new int[m][n];
+        try {
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    res[i][j] = original[in++];
+                }
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            int[][] r = new int[0][0];
+            return r;
+        }
+
+        int count = 0;
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                count++;
+            }
+        }
+        if(count != original.length){
+            return new int[0][0];
+        }else{
+            return res;
+        }
+    }
+}
