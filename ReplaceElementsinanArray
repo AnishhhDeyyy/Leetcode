@@ -1,0 +1,19 @@
+class Solution {
+    public int[] arrayChange(int[] nums, int[][] operations) {
+            HashMap<Integer,Integer> map = new HashMap<>();
+        for(int i=0;i< nums.length;i++){
+            map.put(nums[i],i);
+        }
+        for(int[] operation : operations){
+            int oldval = operation[0];
+            int newval = operation[1];
+            if(map.containsKey(oldval)){
+                int index = map.get(oldval);
+                nums[index] = newval;
+                map.remove(oldval);
+                map.put(newval,index);
+            }
+        }
+        return nums;
+    }
+}
