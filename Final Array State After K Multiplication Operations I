@@ -1,0 +1,20 @@
+class Solution {
+    public int[] getFinalState(int[] nums, int k, int multiplier) {
+         for(int i=0;i<k;i++){
+            multiply(nums,multiplier);
+        }
+        return nums;
+    }
+     public static void multiply(int[] nums,int multiplier){
+        int index = -1;
+        int min  = Integer.MAX_VALUE;
+        for(int i=0;i<nums.length;i++){
+            if(min>nums[i]){
+                min = nums[i];
+                index = i;
+            }
+        }
+        int t = min * multiplier;
+        nums[index] = t;
+    }
+}
