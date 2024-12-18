@@ -1,0 +1,31 @@
+class Solution {
+    public int[] finalPrices(int[] prices) {
+        int[] newPrice = new int[prices.length];
+        for(int i=0;i<newPrice.length;i++){
+            newPrice[i] = -1;
+        }
+        int index = 0;
+        Stack<Integer> st = new Stack<>();
+        int in = 0;
+        int i = 0;
+        while (in!=prices.length) {
+            i = in + 1;
+            st.add(prices[in]);
+            while (i!=prices.length && newPrice[index] == -1) {
+                if (!st.isEmpty() && st.peek() >= prices[i]) {
+                    int t = st.peek() - prices[i];
+                    newPrice[index] = t;
+                } else {
+                    i++;
+                }
+            }
+            if(newPrice[index] == -1){
+                newPrice[index] = prices[in];
+            }
+            st.pop();
+            in++;
+            index++;
+        }
+        return newPrice;
+    }
+}
