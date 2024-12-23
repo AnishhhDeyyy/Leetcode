@@ -1,0 +1,47 @@
+class Solution {
+    public boolean canMakeSubsequence(String str1, String str2) {
+        char[] alpha = new char[26];
+        int in = 0;
+        for(char i='a';i<='z';i++){
+            alpha[in++] = i;
+        }
+        int in1 = 0;
+        int in2 = 0;
+        int count = 0;
+      //  boolean b = false;
+        while (in1!=str1.length()){
+             boolean b = func(str1.charAt(in1),str2.charAt(in2));
+             if(b){
+                 in1++;
+                 in2++;
+                 count++;
+             }else {
+                 int t = str1.charAt(in1) - 97;
+                 char ch = alpha[(t+1)%26];
+                 b = func(ch,str2.charAt(in2));
+                 if(b){
+                     in1++;
+                     in2++;
+                     count++;
+                 }else{
+                     in1++;
+                 }
+             }
+             if(count == str2.length()){
+                break;
+             }
+        }
+        if(count == str2.length()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+      public static boolean func(char s1,char s2){
+        if(s1 == s2){
+            return true;
+        }else {
+            return false;
+        }
+    }
+}
