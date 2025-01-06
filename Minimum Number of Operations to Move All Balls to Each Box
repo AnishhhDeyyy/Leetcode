@@ -1,0 +1,30 @@
+class Solution {
+    public int[] minOperations(String boxes) {
+        int countOne = 0;
+        for(int i=0;i<boxes.length();i++){
+            if(boxes.charAt(i) == '1'){
+                countOne++;
+            }
+        }
+        ArrayList<Integer> li = new ArrayList<>();
+        for(int i=0;i<boxes.length();i++){
+            if(boxes.charAt(i)=='1'){
+                li.add(i);
+            }
+        }
+        int[] re = new int[boxes.length()];
+        for(int i=0;i<boxes.length();i++){
+            int s = calsum(i,li);
+            re[i] = s;
+        }
+        return re;
+    }
+     public static int calsum(int start , ArrayList<Integer> li){
+        int sum = 0;
+        for(int i=0;i<li.size();i++){
+            int t = Math.abs(li.get(i) - start);
+            sum = sum + t;
+        }
+        return sum;
+    }
+}
