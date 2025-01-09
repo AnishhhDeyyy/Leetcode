@@ -1,0 +1,33 @@
+class Solution {
+    public int prefixCount(String[] words, String pref) {
+        int count = 0;
+        for(int i=0;i<words.length;i++){
+            String p = words[i];
+            boolean b = check(p,pref);
+            if(b){
+                count++;
+            }
+        }
+        return count;
+    }
+     public static boolean check(String p,String pref){
+       int count = 0;
+       int i = 0;
+       int j = 0;
+      // int count = 0;
+       while (i<p.length() && j<pref.length()){
+           if(p.charAt(i) == pref.charAt(j)){
+               i++;
+               j++;
+               count++;
+           }else {
+               break;
+           }
+       }
+       if(count == pref.length()){
+           return true;
+       }else {
+           return false;
+       }
+    }
+}
