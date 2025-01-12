@@ -1,0 +1,41 @@
+class Solution {
+    public String minRemoveToMakeValid(String s) {
+        StringBuilder sb = new StringBuilder();
+        Stack<Character> stack = new Stack<>();
+        ArrayList<Integer> lp = new ArrayList<>();
+        ArrayList<Integer> rp = new ArrayList<>();
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)=='('){
+                stack.add(s.charAt(i));
+                lp.add(i);
+            } else if (s.charAt(i)==')') {
+                if(!stack.isEmpty() && stack.peek()=='('){
+                    lp.removeLast();
+                    stack.pop();
+                }else{
+                    rp.add(i);
+                }
+            }
+        }
+        char[] r = new char[s.length()];
+        for(int i=0;i<s.length();i++){
+            r[i] = s.charAt(i);
+        }
+        int index = 0;
+        while (index!=lp.size()){
+            r[lp.get(index)] = '1';
+            index++;
+        }
+        index = 0;
+        while (index!=rp.size()){
+            r[rp.get(index)] = '1';
+            index++;
+        }
+        for(int i=0;i<s.length();i++){
+            if(r[i]!='1'){
+                sb.append(r[i]);
+            }
+        }
+      return String.valueOf(sb);
+    }
+}
